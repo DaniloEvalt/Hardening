@@ -26,9 +26,9 @@ yum update -y selinux-policy*
 
 cp -pf /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 
-***Adicionar comando que baixa a configuração do GIT
+wget -c https://github.com/DaniloEvalt/ShellScript/blob/master/jail.local >> /etc/fail2ban/jail.local
 
-***Adicionar comando que baixa a jail ssh do GIT
+wget -c https://github.com/DaniloEvalt/ShellScript/blob/master/sshd.local >> /etc/fail2ban/jail.d/sshd.local
 
 systemctl enable firewalld
 systemctl start firewalld
