@@ -1,6 +1,6 @@
 [DEFAULT]
 
-# PUT THIS FILE ON /etc/fail2ban/jail.local
+# PUT THIS FILE ON /etc/fail2ban/
 
 #
 # MISCELLANEOUS OPTIONS
