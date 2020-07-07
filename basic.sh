@@ -4,7 +4,7 @@ echo "Atualizando o sistema!"
 yum update -y && yum upgrde -y
 
 echo "Alterando a porta do SSH"
-echo "Port 6022" >> /etc/ssh/sshd_config
+sed -i 's,# Port 22,Port 6022,g' /etc/ssh/sshd_config
 
 echo "Instalando dependências"
 yum install policycoreutils-python
@@ -35,3 +35,16 @@ systemctl start firewalld
 
 systemctl enable fail2ban
 systemctl start fail2ban 
+
+
+
+sed -i 's,PermitRootLogin yes,PermitRootLogin no,g' /etc/ssh/sshd_config
+systemctl reload sshd
+
+
+timedatectl set-timezone America/Sao_Paulo
+yum install ntp
+systemctl start ntpd
+systemctl enable ntpd
+
+
