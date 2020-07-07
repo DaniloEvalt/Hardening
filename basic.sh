@@ -19,7 +19,7 @@ firewall-cmd --reload
 echo "Reiniciando o SSH"
 systemctl restart sshd
 
-echo "Instalando FAIL2BAN!"
+echo "Instalando e configurando o FAIL2BAN"
 yum install fail2ban fail2ban-systemd -y
 
 yum update -y selinux-policy*
@@ -37,14 +37,12 @@ systemctl enable fail2ban
 systemctl start fail2ban 
 
 
-
+echo "Desabilitando o login ssh do usuário ROOT"
 sed -i 's,PermitRootLogin yes,PermitRootLogin no,g' /etc/ssh/sshd_config
 systemctl reload sshd
 
-
+echo "Configurando o NTP"
 timedatectl set-timezone America/Sao_Paulo
-yum install ntp
+yum install ntp -y
 systemctl start ntpd
 systemctl enable ntpd
-
-
