@@ -20,6 +20,7 @@ echo "Reiniciando o SSH"
 systemctl restart sshd
 
 echo "Instalando e configurando o FAIL2BAN"
+yum install epel-release -y
 yum install fail2ban fail2ban-systemd -y
 
 yum update -y selinux-policy*
