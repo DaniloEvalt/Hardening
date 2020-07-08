@@ -27,9 +27,9 @@ yum update -y selinux-policy*
 
 cp -pf /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 
-wget -c https://github.com/DaniloEvalt/ShellScript/blob/master/jail.local >> /etc/fail2ban/jail.local
+wget -c https://raw.githubusercontent.com/DaniloEvalt/ShellScript/blob/master/jail.local >> /etc/fail2ban/jail.local
 
-wget -c https://github.com/DaniloEvalt/ShellScript/blob/master/sshd.local >> /etc/fail2ban/jail.d/sshd.local
+wget -c https://raw.githubusercontent.com/DaniloEvalt/ShellScript/blob/master/sshd.local >> /etc/fail2ban/jail.d/sshd.local
 
 systemctl enable firewalld
 systemctl start firewalld
@@ -39,7 +39,7 @@ systemctl start fail2ban
 
 
 echo "Desabilitando o login ssh do usuário ROOT"
-sed -i 's,PermitRootLogin yes,PermitRootLogin no,g' /etc/ssh/sshd_config
+sed -i 's,# PermitRootLogin yes,PermitRootLogin no,g' /etc/ssh/sshd_config
 systemctl reload sshd
 
 echo "Configurando o NTP"
