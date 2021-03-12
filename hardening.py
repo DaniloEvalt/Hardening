@@ -2,11 +2,12 @@
 
 import os
 import ipaddress
-opcao = 0
-portaSSH = 0
+opcao = (0)
+portaSSH = (0)
 ipEmpresa = (0)
-liberaIP = 0
-
+liberaIP = (0)
+tipoDistro = (0)
+tipoPacote = (" ")
 while liberaIP == 0:
     print('Qual o ip da empresa?')
     ipEmpresa = input('IP Roteável e FIXO\n') 
@@ -21,15 +22,25 @@ while portaSSH > 65535 or portaSSH < 1:
     print('Qual a porta SSH?')
     portaSSH = int(input('Número inteiro de 1 a 65535\n'))
 
+while tipoDistro < 1 or tipoDistro > 2 :
+    tipoDistro = int(input("Qual o tipo de pacote da sua Distribuição?\n1 -> RPM\n2 -> DEB\n"))
+    if tipoDistro == 1:
+        tipoPacote = ("RPM")
+    else:
+        tipoPacote = ("DEB")
+    print(tipoPacote)
 while opcao != 9:
     print("""Bem vindo(a)!
     IP Informado -> """,ipEmpresa,"""
     Porta SSH Informada -> """,portaSSH,"""
+    Tipo de distribuição -> """,tipoPacote,"""
     Selecione uma opção no menu abaixo.
     1 - Permitir IP Life
     2 - Bloquear outros IPs
     3 - Modificar porta SSH
     4 - Rotacionar Logs
+    5 - Atualizar sistema operacional
+    6 - Alterar Tipo de Pacote
     7 - Alterar IP
     8 - Alterar Porta SSH
     9 - Sair
@@ -55,6 +66,21 @@ while opcao != 9:
        os.system("echo 'Rotacionando LOGs'")
        os.system("logrotate --force --verbose /etc/logrotate.conf")
        os.system("echo 'Alterando a porta SSH'")
+    elif opcao == 5:
+       if tipoPacote == ("RPM"):
+        os.system("yum update -y && yum upgrade -y")
+       else:
+        os.system("apt update -y && apt upgrade -y")
+    elif opcao == 6:
+       tipoDistro = 0
+       tipoPacote = 0
+       while tipoDistro < 1 or tipoDistro >2 :
+        tipoDistro = int(input("Qual o tipo de pacote da sua Distribuição?\n1 -> RPM\n2 -> DEB\n"))
+        if tipoDistro == 1:
+            tipoPacote == ("RPM")
+        else:
+            tipoPacote ==("DEB")
+            print(tipoPacote)
     elif opcao == 7:
        ipEmpresa = (0)
        liberaIP = 0
